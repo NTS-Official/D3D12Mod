@@ -9,10 +9,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # ---- JNI 头文件（JDK）----
-if(NOT DEFINED JAVA_HOME)
-    set(JAVA_HOME "C:/Program Files/Java/jdk-26-openjdk/jdk-26")
+find_package(JNI REQUIRED)
+if (JNI_FOUND)
+    include_directories(${JNI_INCLUDE_DIRS})
+else()
+    message(FATAL_ERROR "JNI not found. Please set JAVA_HOME or install JDK and ensure CMake can find JNI.")
 endif()
-include_directories("${JAVA_HOME}/include" "${JAVA_HOME}/include/win32")
 
 # ---- DirectX / Windows SDK ----
 # d3d12.lib、dxgi.lib 由 MSVC 的 Windows SDK 环境自动提供。

@@ -62,3 +62,5 @@ Picture/
 copilot.exe
 *.ps1
 *.py
+/fabric/.idea
+/.idea
